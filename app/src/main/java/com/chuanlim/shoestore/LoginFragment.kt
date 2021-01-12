@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.chuanlim.shoestore.databinding.FragmentLoginBinding
 
 /**
- * Handle login related stuffs
+ * Login Fragment
  */
 class LoginFragment : Fragment() {
     private lateinit var binding:FragmentLoginBinding
@@ -27,8 +27,8 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginBinding.inflate(layoutInflater)
 
         binding.apply {
-            username.doOnTextChanged {_, _, _, _ -> loginErrorMsgLabel.isVisible = false }
-            password.doOnTextChanged { _, _, _, _ -> loginErrorMsgLabel.isVisible = false  }
+            username.doOnTextChanged { _, _, _, _ -> loginErrorMsgLabel.isVisible = false }
+            password.doOnTextChanged { _, _, _, _ -> loginErrorMsgLabel.isVisible = false }
             username.doAfterTextChanged { checkToEnableLoginButtonOrNot() }
             password.doAfterTextChanged { checkToEnableLoginButtonOrNot() }
         }

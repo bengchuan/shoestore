@@ -7,7 +7,8 @@ import androidx.navigation.fragment.findNavController
 import com.chuanlim.shoestore.databinding.FragmentWelcomeBinding
 
 /**
- * LoginFrament > WelcomeFragment
+ * Showing Welcome page for First time user
+ * LoginFragment > WelcomeFragment
  */
 class WelcomeFragment: Fragment() {
     private lateinit var binding: FragmentWelcomeBinding
@@ -16,7 +17,7 @@ class WelcomeFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentWelcomeBinding.inflate(layoutInflater)
         // Add onclick listener
         binding.welcomeNextButton.setOnClickListener {

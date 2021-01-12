@@ -5,23 +5,25 @@ import android.view.*
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.chuanlim.shoestore.databinding.FragmentShoeListingBinding
 import com.chuanlim.shoestore.models.Shoe
 import com.chuanlim.shoestore.models.ShoesViewModel
 
+/**
+ * Showing Added Shoes
+ */
 class ShoeListingFragment : Fragment() {
 
     private lateinit var binding: FragmentShoeListingBinding
-    private lateinit var viewModel: ShoesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentShoeListingBinding.inflate(layoutInflater)
 
         //set Logout
@@ -31,12 +33,7 @@ class ShoeListingFragment : Fragment() {
             findNavController().navigate(ShoeListingFragmentDirections.actionShoeListingFragmentToSaveShoeDetailFragment())
         }
 
-        viewModel = ViewModelProvider(requireActivity()).get(ShoesViewModel::class.java)
-
-        // Setting  the shoes view model
-        binding.shoesViewModel = viewModel
-        binding.lifecycleOwner = this
-
+        val viewModel: ShoesViewModel by activityViewModels()
         viewModel.shoes.observe(viewLifecycleOwner) { shoes -> loadShoes(shoes) }
 
         return binding.root

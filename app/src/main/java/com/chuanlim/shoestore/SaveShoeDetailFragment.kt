@@ -6,22 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.chuanlim.shoestore.databinding.FragmentSaveShoeDetailsBinding
 import com.chuanlim.shoestore.models.Shoe
 import com.chuanlim.shoestore.models.ShoesViewModel
 import kotlinx.android.synthetic.main.fragment_save_shoe_details.*
 
+/**
+ * Saving new shoe details fragment
+ * ShoeListingFragment > SaveShoeDetailFragment
+ */
 class SaveShoeDetailFragment : Fragment() {
     private lateinit var binding: FragmentSaveShoeDetailsBinding
-    private lateinit var viewModel: ShoesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSaveShoeDetailsBinding.inflate(layoutInflater)
 
         binding.apply {
@@ -32,12 +35,6 @@ class SaveShoeDetailFragment : Fragment() {
         }
         binding.saveShoeBtn.setOnClickListener { saveShoe() }
 
-        // Getting the view model
-        viewModel = ViewModelProvider(requireActivity()).get(ShoesViewModel::class.java)
-
-        // Setting  the shoes view model
-        binding.shoesViewModel = viewModel
-        binding.lifecycleOwner = this
         return binding.root
     }
 
@@ -58,6 +55,7 @@ class SaveShoeDetailFragment : Fragment() {
      * Save new shoe
      */
     private fun saveShoe() {
+        val viewModel: ShoesViewModel by activityViewModels()
         viewModel.saveShoeDetails(Shoe(
             editTextShoeName.text.toString(),
             editTextSize.text.toString().toDouble(),

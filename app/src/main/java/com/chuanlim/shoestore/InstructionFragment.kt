@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import com.chuanlim.shoestore.databinding.FragmentInstructionBinding
 
 /**
+ * Showing Instructions for First time user
  * WelcomeFragment > InstructionFragment
  */
 class InstructionFragment : Fragment() {
@@ -16,7 +17,7 @@ class InstructionFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentInstructionBinding.inflate(layoutInflater)
 
         binding.buttonNextInstruction.setOnClickListener {

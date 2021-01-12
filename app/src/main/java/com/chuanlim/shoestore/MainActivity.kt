@@ -1,13 +1,15 @@
 package com.chuanlim.shoestore
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.chuanlim.shoestore.databinding.ActivityMainBinding
-import timber.log.Timber
 
+/**
+ * MainActivity where all fragments are created
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityMainBinding
@@ -34,7 +36,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        Timber.plant(Timber.DebugTree())
     }
 
     override fun onSupportNavigateUp(): Boolean {
