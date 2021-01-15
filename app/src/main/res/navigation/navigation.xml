@@ -2,7 +2,6 @@
 <!-- Step 6: Create Navigation xml -->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
     app:startDestination="@id/loginFragment">
     <fragment
@@ -63,6 +62,8 @@
         android:label="@string/title_fragment_save_shoe">
         <action
             android:id="@+id/action_saveShoeDetailFragment_to_shoeListingFragment"
-            app:destination="@id/shoeListingFragment" />
+            app:destination="@id/shoeListingFragment"
+            app:popUpTo="@id/shoeListingFragment"
+            app:popUpToInclusive="false" />
     </fragment>
 </navigation>

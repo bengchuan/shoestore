@@ -1,7 +1,9 @@
 package com.chuanlim.shoestore
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.chuanlim.shoestore.databinding.FragmentWelcomeBinding
@@ -23,19 +25,6 @@ class WelcomeFragment: Fragment() {
         binding.welcomeNextButton.setOnClickListener {
             findNavController().navigate(R.id.instructionFragment)
         }
-        setHasOptionsMenu(true)
         return binding.root
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.overflow_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.menuLogout -> findNavController().navigate(WelcomeFragmentDirections.actionWelcomeFragmentToLoginFragment2(true))
-        }
-
-        return super.onOptionsItemSelected(item)
     }
 }

@@ -17,6 +17,7 @@ class ShoesViewModel : ViewModel() {
     val shoes: LiveData<MutableList<Shoe>>
         get() = _shoes
 
+
     // Save Shoe Details
     fun saveShoeDetails(shoe:Shoe) {
         _shoes.value?.add(shoe)

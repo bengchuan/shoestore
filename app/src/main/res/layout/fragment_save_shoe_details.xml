@@ -1,28 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?><!-- Easier to align all the ui elements with this layout -->
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!-- Easier to align all the ui elements with this layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/label_editshoename"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/actor"
-        android:text="@string/label_shoe_name"
-        android:textSize="18sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/editTextShoeName"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineLabel" />
+        <TextView
+            android:id="@+id/label_editshoename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/actor"
+            android:text="@string/label_shoe_name"
+            android:textSize="18sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/editTextShoeName"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineLabel" />
 
-    <EditText
-        android:id="@+id/editTextShoeName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:fontFamily="@font/actor"
-        android:hint="Name of the Shoe"
+        <EditText
+            android:id="@+id/editTextShoeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:fontFamily="@font/actor"
+            android:hint="Name of the Shoe"
             android:importantForAutofill="no"
             android:inputType="text"
             android:singleLine="true"
@@ -135,3 +137,4 @@
             app:layout_constraintStart_toStartOf="@+id/guidelineLabel"
             app:layout_constraintTop_toBottomOf="@+id/editTextDescription" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
