@@ -1,6 +1,7 @@
 package com.chuanlim.shoestore
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.chuanlim.shoestore.databinding.FragmentSaveShoeDetailsBinding
-import com.chuanlim.shoestore.models.Shoe
-import com.chuanlim.shoestore.models.ShoesViewModel
-import kotlinx.android.synthetic.main.fragment_save_shoe_details.*
+import com.chuanlim.shoestore.models.ShoeListingViewModel
 
 /**
  * Saving new shoe details fragment
@@ -27,41 +26,49 @@ class SaveShoeDetailFragment : Fragment() {
     ): View {
         binding = FragmentSaveShoeDetailsBinding.inflate(layoutInflater)
 
+        val viewModel: ShoeListingViewModel by activityViewModels()
+        binding.shoesViewModel = viewModel
+        binding.lifecycleOwner = this
+
+        // Unable to find 'doAfterTextChanged' attribute in layout
+        // this is what we can do at the moment.
         binding.apply {
-            editTextShoeName.doAfterTextChanged { enableSaveBtnOrNot() }
-            editTextSize.doAfterTextChanged { enableSaveBtnOrNot() }
-            editTextCompany.doAfterTextChanged { enableSaveBtnOrNot() }
-            editTextDescription.doAfterTextChanged { enableSaveBtnOrNot() }
+            editTextShoeName.doAfterTextChanged {
+                viewModel.name.value = it.toString()
+                viewModel.checkSaveBtn()
+            }
+            editTextSize.doAfterTextChanged {
+                viewModel.size.value = it.toString().toDouble()
+                viewModel.checkSaveBtn()
+            }
+            editTextCompany.doAfterTextChanged {
+                viewModel.company.value = it.toString()
+                viewModel.checkSaveBtn()
+            }
+            editTextDescription.doAfterTextChanged {
+                viewModel.description.value = it.toString()
+                viewModel.checkSaveBtn()
+            }
         }
-        binding.saveShoeBtn.setOnClickListener { saveShoe() }
+
+        // Setting 'save' button onclick
+        binding.saveShoeBtn.setOnClickListener {
+            viewModel.saveShoeDetails()
+            // clear the shoe details
+            viewModel.clearShoeDetails()
+            findNavController().navigate(SaveShoeDetailFragmentDirections.actionSaveShoeDetailFragmentToShoeListingFragment())
+        }
 
         return binding.root
     }
 
     /**
-     * Enable 'SAVE' btn when all the textfields have been filled in
+     * Ensuring the view model data is reset
      */
-    private fun enableSaveBtnOrNot() {
-        //only enable the save btn when all textfields have been filled.
-        binding.apply {
-            saveShoeBtn.isEnabled = editTextShoeName.text.isNotEmpty()
-                    && editTextCompany.text.isNotEmpty()
-                    && editTextSize.text.isNotEmpty()
-                    && editTextDescription.text.isNotEmpty()
-        }
-    }
-
-    /**
-     * Save new shoe
-     */
-    private fun saveShoe() {
-        val viewModel: ShoesViewModel by activityViewModels()
-        viewModel.saveShoeDetails(Shoe(
-            editTextShoeName.text.toString(),
-            editTextSize.text.toString().toDouble(),
-            editTextCompany.text.toString(),
-            editTextDescription.text.toString()
-        ))
-        findNavController().navigate(SaveShoeDetailFragmentDirections.actionSaveShoeDetailFragmentToShoeListingFragment())
+    override fun onDestroyView() {
+        super.onDestroyView()
+        val viewModel: ShoeListingViewModel by activityViewModels()
+        viewModel.clearShoeDetails()
+        Log.i("SaveShoe", "Clearing the shoe details.")
     }
 }

@@ -3,10 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <!--Activity wide ViewModel -->
     <data>
-
         <variable
             name="shoesViewModel"
-            type="com.chuanlim.shoestore.models.ShoesViewModel" />
+            type="com.chuanlim.shoestore.models.ShoeListingViewModel" />
     </data>
 
     <!-- We don't need complex here, most of the layout arrangement is within fragment itself. -->

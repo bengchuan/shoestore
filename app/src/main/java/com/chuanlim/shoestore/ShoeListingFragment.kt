@@ -10,7 +10,7 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.chuanlim.shoestore.databinding.FragmentShoeListingBinding
 import com.chuanlim.shoestore.models.Shoe
-import com.chuanlim.shoestore.models.ShoesViewModel
+import com.chuanlim.shoestore.models.ShoeListingViewModel
 
 /**
  * Showing Added Shoes
@@ -33,7 +33,7 @@ class ShoeListingFragment : Fragment() {
             findNavController().navigate(ShoeListingFragmentDirections.actionShoeListingFragmentToSaveShoeDetailFragment())
         }
 
-        val viewModel: ShoesViewModel by activityViewModels()
+        val viewModel: ShoeListingViewModel by activityViewModels()
         viewModel.shoes.observe(viewLifecycleOwner) { shoes -> loadShoes(shoes) }
 
         return binding.root
