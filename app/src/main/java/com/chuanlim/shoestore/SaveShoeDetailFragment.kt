@@ -1,15 +1,14 @@
 package com.chuanlim.shoestore
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.chuanlim.shoestore.databinding.FragmentSaveShoeDetailsBinding
+import com.chuanlim.shoestore.models.Shoe
 import com.chuanlim.shoestore.models.ShoeListingViewModel
 
 /**
@@ -30,45 +29,25 @@ class SaveShoeDetailFragment : Fragment() {
         binding.shoesViewModel = viewModel
         binding.lifecycleOwner = this
 
-        // Unable to find 'doAfterTextChanged' attribute in layout
-        // this is what we can do at the moment.
-        binding.apply {
-            editTextShoeName.doAfterTextChanged {
-                viewModel.name.value = it.toString()
-                viewModel.checkSaveBtn()
-            }
-            editTextSize.doAfterTextChanged {
-                viewModel.size.value = it.toString().toDouble()
-                viewModel.checkSaveBtn()
-            }
-            editTextCompany.doAfterTextChanged {
-                viewModel.company.value = it.toString()
-                viewModel.checkSaveBtn()
-            }
-            editTextDescription.doAfterTextChanged {
-                viewModel.description.value = it.toString()
-                viewModel.checkSaveBtn()
-            }
-        }
-
         // Setting 'save' button onclick
         binding.saveShoeBtn.setOnClickListener {
-            viewModel.saveShoeDetails()
-            // clear the shoe details
-            viewModel.clearShoeDetails()
-            findNavController().navigate(SaveShoeDetailFragmentDirections.actionSaveShoeDetailFragmentToShoeListingFragment())
+            addShoeToList()
         }
-
         return binding.root
     }
 
-    /**
-     * Ensuring the view model data is reset
-     */
-    override fun onDestroyView() {
-        super.onDestroyView()
+    private fun addShoeToList() {
         val viewModel: ShoeListingViewModel by activityViewModels()
-        viewModel.clearShoeDetails()
-        Log.i("SaveShoe", "Clearing the shoe details.")
+        val shoe = Shoe()
+        binding.apply {
+            shoe.name = editTextShoeName.text.toString()
+            shoe.company = editTextCompany.text.toString()
+            shoe.size = editTextSize.text.toString().toDouble()
+            shoe.description = editTextDescription.text.toString()
+        }
+        viewModel.saveShoeDetails(shoe)
+        findNavController().navigate(
+            SaveShoeDetailFragmentDirections.actionSaveShoeDetailFragmentToShoeListingFragment()
+        )
     }
 }

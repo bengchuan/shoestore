@@ -8,6 +8,10 @@
         <variable
             name="shoesViewModel"
             type="com.chuanlim.shoestore.models.ShoeListingViewModel" />
+
+        <variable
+            name="shoe"
+            type="com.chuanlim.shoestore.models.Shoe" />
     </data>
 
     <!-- Easier to align all the ui elements with this layout -->
@@ -38,7 +42,7 @@
             android:inputType="text"
             android:singleLine="true"
             android:textSize="18sp"
-            android:text="@{shoesViewModel.name}"
+            android:text="@{shoe.name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/label_editshoename"
@@ -66,7 +70,7 @@
             android:inputType="numberDecimal"
             android:singleLine="true"
             android:textSize="18sp"
-            android:text="@{@string/format_double(shoesViewModel.size)}"
+            android:text="@{@string/format_double(shoe.size)}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/label_editSize"
@@ -85,7 +89,7 @@
             android:inputType="text"
             android:singleLine="true"
             android:textSize="18sp"
-            android:text="@{shoesViewModel.company}"
+            android:text="@{shoe.company}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/label_editSize"
@@ -132,7 +136,7 @@
             android:ems="10"
             android:gravity="start|top"
             android:hint="Enter a shoe description here"
-            android:text="@{shoesViewModel.description}"
+            android:text="@{shoe.description}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/guidelineLabel"
@@ -143,7 +147,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:enabled="@{shoesViewModel.saveBtnEnabled}"
             android:text="@string/btn_save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.84"
