@@ -27,6 +27,8 @@ class SaveShoeDetailFragment : Fragment() {
 
         val viewModel: ShoeListingViewModel by activityViewModels()
         binding.shoesViewModel = viewModel
+        // Bind the view to the data
+        binding.shoe = Shoe()
         binding.lifecycleOwner = this
 
         // Setting 'save' button onclick
@@ -36,16 +38,16 @@ class SaveShoeDetailFragment : Fragment() {
         return binding.root
     }
 
+    // Add Shoe to the ShoeList
     private fun addShoeToList() {
         val viewModel: ShoeListingViewModel by activityViewModels()
-        val shoe = Shoe()
         binding.apply {
-            shoe.name = editTextShoeName.text.toString()
-            shoe.company = editTextCompany.text.toString()
-            shoe.size = editTextSize.text.toString().toDouble()
-            shoe.description = editTextDescription.text.toString()
+            shoe?.name = editTextShoeName.text.toString()
+            shoe?.company = editTextCompany.text.toString()
+            shoe?.size = editTextSize.text.toString().toDouble()
+            shoe?.description = editTextDescription.text.toString()
         }
-        viewModel.saveShoeDetails(shoe)
+        viewModel.saveShoeDetails(binding.shoe!!)
         findNavController().navigate(
             SaveShoeDetailFragmentDirections.actionSaveShoeDetailFragmentToShoeListingFragment()
         )
